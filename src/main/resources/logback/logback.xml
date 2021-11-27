@@ -3,7 +3,7 @@
     <!--应用名,从springboot 中的application.yml 读取-->
     <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="app"/>
     <!--日志根目录-->
-    <property scope="context" name="LOG_HOME" value="logs" />
+    <property scope="context" name="LOG_HOME" value="logs"/>
     <!--应用启动时间-->
     <timestamp key="bySecond" datePattern="yyyyMMddHHmmss"/>
 
@@ -48,9 +48,9 @@
 
     <!-- 控制台输出日志级别 -->
     <root level="INFO">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE" />
-        <appender-ref ref="ROLLING_FILE" />
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="ROLLING_FILE"/>
     </root>
     <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
 </configuration>

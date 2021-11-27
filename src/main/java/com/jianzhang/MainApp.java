@@ -23,7 +23,7 @@ public class MainApp implements ApplicationListener<ApplicationReadyEvent> {
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         LOGGER.info("===============================================");
-        LOGGER.info("visit server with：http://localhost:{}",port);
+        LOGGER.info("visit server with：http://localhost:{}", port);
         LOGGER.info("===============================================");
     }
 }

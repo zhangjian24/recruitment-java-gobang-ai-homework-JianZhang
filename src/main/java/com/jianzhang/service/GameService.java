@@ -20,12 +20,14 @@ public interface GameService {
 
     /**
      * 新一轮棋局
+     *
      * @return
      */
     Map newGame();
 
     /**
      * 放置棋子
+     *
      * @param gameId
      * @param x
      * @param y
@@ -35,12 +37,14 @@ public interface GameService {
 
     /**
      * 棋局列表
+     *
      * @return
      */
     Map gameList();
 
     /**
      * 棋局详情
+     *
      * @param gameId
      * @return
      */

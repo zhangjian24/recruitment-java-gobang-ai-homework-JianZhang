@@ -176,6 +176,7 @@ public class SimpleTest {
 
     /**
      * 横向oo_oo，连续长度对应可放置的点
+     *
      * @throws Exception
      */
     @Test
@@ -194,6 +195,7 @@ public class SimpleTest {
 
     /**
      * 横向oo#oo，连续长度对应可放置的点
+     *
      * @throws Exception
      */
     @Test
@@ -211,12 +213,13 @@ public class SimpleTest {
     }
 
     /**
-     *_____
-     *_o#o_
-     *__o__
-     *_____
-     *___o_
+     * _____
+     * _o#o_
+     * __o__
+     * _____
+     * ___o_
      * 连续长度对应可放置的点
+     *
      * @throws Exception
      */
     @Test

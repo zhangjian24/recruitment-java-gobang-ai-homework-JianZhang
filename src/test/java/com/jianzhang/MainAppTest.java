@@ -46,7 +46,7 @@ public class MainAppTest {
     ObjectMapper objectMapper;
 
     @Test
-    public void newGameTest()throws Exception{
+    public void newGameTest() throws Exception {
         MvcResult res = mockMvc.perform(post("/games"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -54,7 +54,7 @@ public class MainAppTest {
     }
 
     @Test
-    public void gameListTest()throws Exception{
+    public void gameListTest() throws Exception {
         mockMvc.perform(get("/games"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -62,7 +62,7 @@ public class MainAppTest {
     }
 
     @Test
-    public void gameInfoTest()throws Exception{
+    public void gameInfoTest() throws Exception {
         mockMvc.perform(get("/games/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -70,9 +70,9 @@ public class MainAppTest {
     }
 
     @Test
-    public void positionsTest()throws Exception{
+    public void positionsTest() throws Exception {
         mockMvc.perform(post("/games/1/positions").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new PositionInfo(13,14))))
+                .content(objectMapper.writeValueAsString(new PositionInfo(13, 14))))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.complete").exists());

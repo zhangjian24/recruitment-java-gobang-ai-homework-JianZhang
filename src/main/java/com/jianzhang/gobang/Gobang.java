@@ -56,6 +56,7 @@ public class Gobang {
 
     /**
      * 用户落子
+     *
      * @param x
      * @param y
      * @return 是否胜利
@@ -77,6 +78,7 @@ public class Gobang {
 
     /**
      * AI落子 是否胜利
+     *
      * @param x
      * @param y
      * @return
@@ -98,6 +100,7 @@ public class Gobang {
 
     /**
      * 确定是否胜利
+     *
      * @param flag 用户标记/AI标记
      * @return
      */
@@ -119,7 +122,7 @@ public class Gobang {
                     isWin = true;
                 }
             }
-            if (lineJoiner.length()>0) {
+            if (lineJoiner.length() > 0) {
                 LOGGER.debug(lineJoiner.toString());
             }
         }
@@ -142,7 +145,7 @@ public class Gobang {
                     isWin = true;
                 }
             }
-            if (lineJoiner.length()>0) {
+            if (lineJoiner.length() > 0) {
                 LOGGER.debug(lineJoiner.toString());
             }
         }
@@ -168,7 +171,7 @@ public class Gobang {
                     isWin = true;
                 }
             }
-            if (lineJoiner.length()>0) {
+            if (lineJoiner.length() > 0) {
                 LOGGER.debug(lineJoiner.toString());
             }
         }
@@ -194,7 +197,7 @@ public class Gobang {
                     isWin = true;
                 }
             }
-            if (lineJoiner.length()>0) {
+            if (lineJoiner.length() > 0) {
                 LOGGER.debug(lineJoiner.toString());
             }
         }
@@ -204,14 +207,15 @@ public class Gobang {
 
     /**
      * 计算AI最佳落子位置
+     *
      * @return
      */
     public synchronized PositionInfo estimateAI() {
 //        如果发现自己下子后可以获胜，则在对应位置落子
         Map<Integer, List<PositionInfo>> estimateA = estimate(AI_FLAG);
         Map<PositionInfo, Long> scoreMapA = calScore(estimateA);
-        if (Objects.nonNull(estimateA.get(WIN_LENGTH-1))) {
-            Optional<PositionInfo> best = estimateA.get(WIN_LENGTH-1).stream().max(Comparator.comparing(scoreMapA::get));
+        if (Objects.nonNull(estimateA.get(WIN_LENGTH - 1))) {
+            Optional<PositionInfo> best = estimateA.get(WIN_LENGTH - 1).stream().max(Comparator.comparing(scoreMapA::get));
             if (best.isPresent()) {
                 return best.get();
             }
@@ -219,15 +223,15 @@ public class Gobang {
 //        否则，当发现用户的棋有四个连在一起的，需要去落子堵住一头
         Map<Integer, List<PositionInfo>> estimateU = estimate(USER_FLAG);
         Map<PositionInfo, Long> scoreMapU = calScore(estimateU);
-        if (Objects.nonNull(estimateU.get(WIN_LENGTH-1))) {
-            Optional<PositionInfo> best = estimateU.get(WIN_LENGTH-1).stream().max(Comparator.comparing(scoreMapU::get));
+        if (Objects.nonNull(estimateU.get(WIN_LENGTH - 1))) {
+            Optional<PositionInfo> best = estimateU.get(WIN_LENGTH - 1).stream().max(Comparator.comparing(scoreMapU::get));
             if (best.isPresent()) {
                 return best.get();
             }
         }
 //        否则，当发现用户的棋有三个连在一起的，需要去落子堵住一头
-        if (Objects.nonNull(estimateU.get(WIN_LENGTH-2))) {
-            Optional<PositionInfo> best = estimateU.get(WIN_LENGTH-2).stream().max(Comparator.comparing(scoreMapU::get));
+        if (Objects.nonNull(estimateU.get(WIN_LENGTH - 2))) {
+            Optional<PositionInfo> best = estimateU.get(WIN_LENGTH - 2).stream().max(Comparator.comparing(scoreMapU::get));
             if (best.isPresent()) {
                 return best.get();
             }
@@ -239,6 +243,7 @@ public class Gobang {
 
     /**
      * 计算已有连续点周围的落子点
+     *
      * @param flag
      * @return
      */
@@ -272,7 +277,7 @@ public class Gobang {
                     }
                     if (this.arr[k][j] == 0) {
                         startPos = new PositionInfo(k, j);
-                    }else {
+                    } else {
                         startPos = null;
                     }
                 }
@@ -309,7 +314,7 @@ public class Gobang {
                     }
                     if (this.arr[i][k] == 0) {
                         startPos = new PositionInfo(i, k);
-                    }else {
+                    } else {
                         startPos = null;
                     }
                 }
@@ -349,7 +354,7 @@ public class Gobang {
                     }
                     if (this.arr[i][k - i] == 0) {
                         startPos = new PositionInfo(i, k - i);
-                    }else {
+                    } else {
                         startPos = null;
                     }
                 }
@@ -389,7 +394,7 @@ public class Gobang {
                     }
                     if (this.arr[i][i + k] == 0) {
                         startPos = new PositionInfo(i, i + k);
-                    }else {
+                    } else {
                         startPos = null;
                     }
                 }
@@ -404,6 +409,7 @@ public class Gobang {
 
     /**
      * 计算落子点的推荐值
+     *
      * @param pos
      * @return
      */
@@ -416,7 +422,7 @@ public class Gobang {
                 if (Objects.isNull(score)) {
                     score = 0L;
                 }
-                score += (long) k * k*width*width;//连子推荐值，连子长度、个数越大越推荐
+                score += (long) k * k * width * width;//连子推荐值，连子长度、个数越大越推荐
                 scoreMap.put(positionInfo, score);
             }
         });
@@ -427,10 +433,10 @@ public class Gobang {
                 if (arr[i][j] == 0) {
                     PositionInfo positionInfo = new PositionInfo(i, j);
                     if (!scoreMap.containsKey(positionInfo)) {
-                        scoreMap.put(positionInfo, (long) (width*i-i*i + width*j-j*j));
-                    }else {
+                        scoreMap.put(positionInfo, (long) (width * i - i * i + width * j - j * j));
+                    } else {
                         Long score = scoreMap.get(positionInfo);
-                        scoreMap.put(positionInfo, score+(long) (width*i-i*i + width*j-j*j));
+                        scoreMap.put(positionInfo, score + (long) (width * i - i * i + width * j - j * j));
                     }
                 }
             }
