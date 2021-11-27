@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * 游戏
+ * 棋局
  */
 @Entity
 public class Game {
